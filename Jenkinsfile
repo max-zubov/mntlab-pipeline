@@ -13,6 +13,13 @@ node {
         sh 'gradle build'
 
 
+    stage 'Testing code'
+        parallel (
+                'Unit Tests': {sh 'gradle test' },
+                'Jacoco Tests': {sh 'gradle jacocoTestReport' },
+                'Cucumber Tests': {sh 'gradle cucumber' }
+                )
+
 
 }
 
