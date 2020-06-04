@@ -20,6 +20,14 @@ node {
                 'Cucumber Tests': {sh 'gradle cucumber' }
                 )
 
+    stage ' Triggering job and fetching artifacts after finishing'
+        build job: "${child_job}", \
+            parameters: [string(name: 'BRANCH_NAME', value: "${student}")], wait: true
+        step([$class: 'CopyArtifact',
+            projectName: "${child_job}",
+            filter: "${child_artifact}"]);
+
+
 
 }
 
