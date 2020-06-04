@@ -42,5 +42,9 @@ node {
         }
 
 
+    stage 'Deployment' 
+        sh 'java -jar gradle-simple.jar '
+
+
 }
 
