@@ -20,6 +20,7 @@ node {
                 'Cucumber Tests': {sh 'gradle cucumber' }
                 )
 
+
     stage ' Triggering job and fetching artifacts after finishing'
         build job: "${child_job}", \
             parameters: [string(name: 'BRANCH_NAME', value: "${student}")], wait: true
@@ -27,6 +28,12 @@ node {
             projectName: "${child_job}",
             filter: "${child_artifact}"]);
 
+
+    stage 'Packing and Publishing results'
+        sh "tar -xzf ${child_artifact}"
+        sh "cp build/libs/${JOB_NAME}.jar gradle-simple.jar"
+        sh "tar -zcf ${student}-${BUILD_NUMBER}.tar.gz jobs.groovy Jenkinsfile gradle-simple.jar"
+        archiveArtifacts "${student}-${BUILD_NUMBER}.tar.gz"
 
 
 }
