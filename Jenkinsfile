@@ -6,7 +6,7 @@ node {
     def child_artifact = "${student}_dsl_script.tar.gz"
 
     stage 'Preparation (Checking out)'
-        git url: "/home/student/mntlab-pipeline", branch: 'mzubov'
+        git url: "https://github.com/max-zubov/mntlab-pipeline", branch: 'mzubov'
 
  
     stage 'Building code'
