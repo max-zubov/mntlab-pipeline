@@ -36,5 +36,11 @@ node {
         archiveArtifacts "${student}-${BUILD_NUMBER}.tar.gz"
 
 
+    stage 'Asking for manual approval' 
+        timeout(time:1, unit:'HOURS') {
+        input message:'Please approve current deployment', ok: 'Yes'
+        }
+
+
 }
 
